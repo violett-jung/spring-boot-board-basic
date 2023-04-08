@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -32,6 +33,18 @@ public class BoardController {
         return "boardlist";
     }
 
+    @GetMapping("/board/view") //localhost:8080/board/view?id=1 <- 파라미터, get방식
+    public String boardView(Model model, Integer id){
+        model.addAttribute("board", boardService.boardView(id));
+        return "boardview";
+    }
+
+
+//    @GetMapping("/board/view/{id}") //리팩토링, url에서 입력받은 값을 바로 id 변수에 넣음
+//    public String boardView(Model model, @PathVariable Integer id){
+//        model.addAttribute("board", boardService.boardView(id));
+//        return "boardview";
+//    }
 
 
 }
