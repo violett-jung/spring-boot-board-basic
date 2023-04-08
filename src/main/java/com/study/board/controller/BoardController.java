@@ -51,6 +51,22 @@ public class BoardController {
         return "redirect:/board/list";
     }
 
+    @GetMapping("/board/modify/{id}")
+    public String boardModify(Model model, @PathVariable("id") Integer id){
+        model.addAttribute("board", boardService.boardView(id));
+        return "boardmodify";
+    }
+
+
+    @PostMapping("/board/update/{id}")
+    public String boardUpdate(Board board, @PathVariable("id") Integer id){
+        Board boardTemp = boardService.boardView(id);
+        boardTemp.setTitle(board.getTitle());
+        boardTemp.setContent(board.getContent());
+        boardService.write(boardTemp);
+        return "redirect:/board/list";
+    }
+
 
 }
 
